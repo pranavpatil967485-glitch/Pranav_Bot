@@ -1,66 +1,8 @@
-export default {
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-    const path = url.pathname;
 
-    // CORS Headers ताकि आपकी सेपरेट वेबसाइट इस बैकएंड से जुड़ सके
-    const corsHeaders = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Content-Type': 'application/json;charset=UTF-8',
-    };
+  }, Delta exchanges 
+};wemhlT86xlDBnPVajjUuTx7gaNS0gH ( API Key) 
 
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { headers: corsHeaders });
-    }
-
-    try {
-      // 1. डैशबोर्ड के लिए लाइव स्टेटस और ट्रेड्स फेच करने का एंडपॉइंट
-      if (path === '/api/status') {
-        const apiKey = env.BINANCE_API_KEY;
-        const apiSecret = env.BINANCE_API_SECRET;
-
-        if (!apiKey || !apiSecret) {
-          return new Response(JSON.stringify({ 
-            status: "ERROR", 
-            message: "API Keys are not configured in Cloudflare Environment Variables!" 
-          }), { status: 400, headers: corsHeaders });
-        }
-
-        // यहाँ एक्सचेंज से लाइव डेटा आएगा (फिलहाल लाइव स्ट्रक्चर दिया गया है)
-        const botData = {
-          botStatus: "Running (Live Real Trading)",
-          walletBalance: "$1,250.40",
-          todayPnl: "+$42.50",
-          activePositionsCount: 2,
-          activeTrades: [
-            { asset: "BTC/USDT", type: "BUY", entryPrice: "$65,200", currentPrice: "$65,800", pnl: "+$60.00" },
-            { asset: "TRU/USDT", type: "BUY", entryPrice: "$0.125", currentPrice: "$0.131", pnl: "+$48.00" }
-          ]
-        };
-
-        return new Response(JSON.stringify(botData), { headers: corsHeaders });
-      }
-
-      // 2. बोट कंट्रोल एंडपॉइंट (Start/Stop)
-      if (path === '/api/control' && request.method === 'POST') {
-        const body = await request.json();
-        return new Response(JSON.stringify({ 
-          success: true, 
-          message: `Bot action '${body.action}' executed successfully on live market.` 
-        }), { headers: corsHeaders });
-      }
-
-      return new Response(JSON.stringify({ message: "Patil Real Trading Bot Backend is Active." }), { headers: corsHeaders });
-
-    } catch (error) {
-      return new Response(JSON.stringify({ error: error.message }), { status: 500, headers: corsHeaders });
-    }
-  },
-};wemhlT86xlDBnPVajjUuTx7gaNS0gH
-
-qRGmt9qymhGE0hX13IbSVVKS7ZeyS1UZegGRwb2B9skEENgkYSbet7tXrtBJ
+qRGmt9qymhGE0hX13IbSVVKS7ZeyS1UZegGRwb2B9skEENgkYSbet7tXrtBJ ( API seare)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -208,4 +150,63 @@ qRGmt9qymhGE0hX13IbSVVKS7ZeyS1UZegGRwb2B9skEENgkYSbet7tXrtBJ
     </script>
 </body>
                   </html>
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    const path = url.pathname;
+
+    // CORS Headers ताकि आपकी सेपरेट वेबसाइट इस बैकएंड से जुड़ सके
+    const corsHeaders = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { headers: corsHeaders });
+    }
+
+    try {
+      // 1. डैशबोर्ड के लिए लाइव स्टेटस और ट्रेड्स फेच करने का एंडपॉइंट
+      if (path === '/api/status') {
+        const apiKey = env.BINANCE_API_KEY;
+        const apiSecret = env.BINANCE_API_SECRET;
+
+        if (!apiKey || !apiSecret) {
+          return new Response(JSON.stringify({ 
+            status: "ERROR", 
+            message: "API Keys are not configured in Cloudflare Environment Variables!" 
+          }), { status: 400, headers: corsHeaders });
+        }
+
+        // यहाँ एक्सचेंज से लाइव डेटा आएगा (फिलहाल लाइव स्ट्रक्चर दिया गया है)
+        const botData = {
+          botStatus: "Running (Live Real Trading)",
+          walletBalance: "$1,250.40",
+          todayPnl: "+$42.50",
+          activePositionsCount: 2,
+          activeTrades: [
+            { asset: "BTC/USDT", type: "BUY", entryPrice: "$65,200", currentPrice: "$65,800", pnl: "+$60.00" },
+            { asset: "TRU/USDT", type: "BUY", entryPrice: "$0.125", currentPrice: "$0.131", pnl: "+$48.00" }
+          ]
+        };
+
+        return new Response(JSON.stringify(botData), { headers: corsHeaders });
+      }
+
+      // 2. बोट कंट्रोल एंडपॉइंट (Start/Stop)
+      if (path === '/api/control' && request.method === 'POST') {
+        const body = await request.json();
+        return new Response(JSON.stringify({ 
+          success: true, 
+          message: `Bot action '${body.action}' executed successfully on live market.` 
+        }), { headers: corsHeaders });
+      }
+
+      return new Response(JSON.stringify({ message: "Patil Real Trading Bot Backend is Active." }), { headers: corsHeaders });
+
+    } catch (error) {
+      return new Response(JSON.stringify({ error: error.message }), { status: 500, headers: corsHeaders });
+    }
               
